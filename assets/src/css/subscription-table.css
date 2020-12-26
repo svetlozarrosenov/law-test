@@ -1,0 +1,27 @@
+.test-container { position: relative; display: block; width: 50%; margin: 0 auto; margin-top: 30px; margin-bottom: 30px; padding: 30px; background: #F4F4F4; border: 1px solid #C1CDC1; border-radius: 30px; }
+.test-step .test-step__question { text-align: center; color: #000; }
+.test-step-answers { margin: 0 auto; }
+.test-step-answers .test-step-answers__answer { text-align: center; }
+.test-step-answers .test-step-answers__answer span { display: inline-block; padding: 5px 20px; min-width: 200px; text-align: center; background: #EAEAEA; border: 1px solid #C1CDC1; color: #000; border-radius: 30px; cursor: pointer; transition: 600ms; }
+.test-step-answers .test-step-answers__answer span:hover { opacity: .6; }
+
+.test-step-answers .test-step-answers__answer .wrong-answer { background: #FF0000; }
+.test-step-answers .test-step-answers__answer .right-answer { background: #00FF00; }
+
+.test-step__actions:after{ content: ''; display: table; clear: both; }
+
+.btn-prev, .btn-next { font-size: 15px; background: #0394ce; width: 200px; padding: 10px 20px; border-radius: 30px; color: #000 !important; transition: 600ms; }
+.btn-prev:hover, .btn-next:hover { background: #0394ce !important; color: #000 !important; opacity: .6; }
+
+.btn-prev { float: left; }
+.btn-next { float: right; }
+
+.info { position: absolute; top: 0; right: 0; cursor: pointer; }
+.info img { width: 50px; }
+
+.popup-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color:rgba(30,30,30,0.7); }
+
+.popup-modal .popup-modal__info-box { position: absolute; padding: 30px; color: #fff; top: 30%; left: 50%; transform: translateX(-50%); background-color: #000; border-radius: 30px; }
+
+.popup-moda__close { position: absolute; top: -40px; right: 0; cursor: pointer; }
+.popup-moda__close:after { content: 'X'; color: red; font-size: 30px; }
