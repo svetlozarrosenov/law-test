@@ -23,6 +23,7 @@ dist/
 target/
 dist/
 vendor/
+
 # JetBrains IDE
 .idea/
 

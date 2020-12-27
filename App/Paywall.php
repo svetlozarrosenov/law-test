@@ -6,28 +6,30 @@ class Paywall {
 	private $clientSecret;
 
 	public function __construct() {
-		\Stripe\Stripe::setApiKey('sk_test_kV6YIBnQqyA0KSTtThCgSb8h00qnsk7JkQ');
+    \Stripe\Stripe::setApiKey('sk_test_kV6YIBnQqyA0KSTtThCgSb8h00qnsk7JkQ');
+
+    $intent = \Stripe\PaymentIntent::create([
+      'amount' => 1099,
+      'currency' => 'bgn',
+      // Verify your integration in this guide by including this parameter
+      'metadata' => ['integration_check' => 'accept_a_payment'],
+    ]);
 		
-		$intent = \Stripe\PaymentIntent::create([
-			'amount' => 500,
-			'currency' => 'bgn',
-			// Verify your integration in this guide by including this parameter
-			'metadata' => ['integration_check' => 'accept_a_payment'],
-		] );
-		
-		$this->clientSecret = $intent->client_secret;
-		
-		$this->createClientForm();
+		$this->createClientForm( $intent );
 	}
 
-	public function createClientForm() {
+	public static function createClientForm( $intent ) {
 		?>
-		<input id="card-name" type="text">
-		<!-- placeholder for Elements -->
-		<div id="card-element"></div>
-		<button id="card-button" data-secret="<?= $this->clientSecret ?>">
-		  Submit Payment
-		</button>
+    <form id="payment-form">
+    <div id="card-element">
+      <!-- Elements will create input elements here -->
+    </div>
+
+    <!-- We'll put the error messages in this element -->
+    <div id="card-errors" role="alert"></div>
+
+    <button id="submit" data-secret="<?= $intent->client_secret ?>">Pay</button>
+    </form>
 		<?php
 	}
 }

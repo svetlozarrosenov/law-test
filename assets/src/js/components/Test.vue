@@ -1,8 +1,6 @@
 <template>
 	<div class="test-container">
 		<InfoPopup/>
-
-		<button id="checkout-button">Checkout</button>
 		
 		Време: {{countMinutes}}
 

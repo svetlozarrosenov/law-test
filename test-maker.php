@@ -20,14 +20,14 @@ class TestMaker {
 		require 'vendor/autoload.php';
 
 		add_action('after_setup_theme', function() {
-			$paywall = new App\Test\Paywall();
+			new App\Test\Paywall();
 		} );
 
 		$admin = new App\Test\Admin();
 
 		add_action( 'wp_ajax_crb_ajax_get_questions', 'crb_ajax_get_questions' );
 		add_action( 'wp_ajax_nopriv_crb_ajax_get_questions', 'crb_ajax_get_questions' );
-		
+
 		function crb_ajax_get_questions() {  
 
 			$testID = isset( $_POST['postID'] ) ? $_POST['postID'] : false;
