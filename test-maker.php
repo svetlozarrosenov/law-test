@@ -25,6 +25,15 @@ class TestMaker {
 
 		$admin = new Admin();
 
+		add_action( 'wp_ajax_crb_is_user_logged_in', 'crb_is_user_logged_in' );
+		add_action( 'wp_ajax_nopriv_crb_is_user_logged_in', 'crb_is_user_logged_in' );
+
+		function crb_is_user_logged_in() {
+			wp_send_json_success( [
+        		'is_logged_in' => \is_user_logged_in(),
+  			] );
+		}
+
 		add_action( 'wp_ajax_crb_ajax_get_questions', 'crb_ajax_get_questions' );
 		add_action( 'wp_ajax_nopriv_crb_ajax_get_questions', 'crb_ajax_get_questions' );
 

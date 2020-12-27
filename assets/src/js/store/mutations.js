@@ -10,6 +10,12 @@ var mutations = {
 
 		state.testTime.setMinutes(state.initialTime.getMinutes() + payload.time);		
 	},
+	reverseRegisterPopup(state, payload) {
+		state.showRegisterPopup = !state.showRegisterPopup;
+	},
+	reverseLoginPopup(state, payload) {
+		state.showLoginPopup = !state.showLoginPopup;	
+	},
 	checkAnswer(state, payload) {
 		if(payload.question.answered){
 			return;

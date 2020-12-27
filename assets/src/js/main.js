@@ -12,4 +12,4 @@ new Vue({
 	components: { App },
 }).$mount('#app');
 
-paywall();
+// paywall();

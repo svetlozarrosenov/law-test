@@ -12,9 +12,15 @@ var getters = {
 		if ( !state.testTime ) {
 			return;
 		}
-		console.log(state.testTime.getMinutes());
 		return  state.testTime.getHours() + ':' + state.testTime.getMinutes();
-	}
+	},
+	showRegisterPopup(state) {
+		return state.showRegisterPopup;
+	},
+	showLoginPopup(state) {
+		return state.showLoginPopup;
+	},
+
 };
 
 export default getters;
