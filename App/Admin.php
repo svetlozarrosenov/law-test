@@ -8,7 +8,6 @@ class Admin {
 	
 	public function __construct() {
 		$this->bootCarbonfields();
-		$this->loadAssets();
 		$this->createCustomPostTypeTemplate();
 		$this->loadAssets();
 	}	
@@ -18,10 +17,11 @@ class Admin {
 			
 			\Carbon_Fields\Carbon_Fields::boot();			
 
-			add_action( 'carbon_fields_register_fields', array($this, 'createTestMeta') );
+			// add_action( 'carbon_fields_register_fields', array($this, 'createTestMeta') );
 			
 			$this->createPostTypes()
 				->createTaxonomies()
+				->createTestMeta()
 				->createUserMeta();
 		} );
 	}
@@ -155,7 +155,7 @@ class Admin {
 	}
 
 	public function createTestMeta() {
-		Container::make( 'post_meta', __( 'test Settings', 'crb' ) )
+		Container::make( 'post_meta', __( 'Test Custom Settings', 'crb' ) )
 			->where( 'post_type', '=', 'crb_test' )
 			->add_fields( array(
 				Field::make( 'association', 'crb_test_categories', __( 'Categories', 'crb' ) )
@@ -181,6 +181,8 @@ class Admin {
 					->set_header_template('<%- answer %>')
 					->set_layout('tabbed-vertical'),
 			) );
+
+		return $this;
 	}
 	public function createUserMeta() {
 		Container::make( 'user_meta', 'Order Settings' )

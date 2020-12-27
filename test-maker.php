@@ -19,11 +19,11 @@ class TestMaker {
 	public function __construct() {
 		require 'vendor/autoload.php';
 
-		add_action('after_setup_theme', function() {
-			new App\Test\Paywall();
-		} );
+		// add_action('after_setup_theme', function() {
+		// 	new App\Test\Paywall();
+		// } );
 
-		$admin = new App\Test\Admin();
+		$admin = new Admin();
 
 		add_action( 'wp_ajax_crb_ajax_get_questions', 'crb_ajax_get_questions' );
 		add_action( 'wp_ajax_nopriv_crb_ajax_get_questions', 'crb_ajax_get_questions' );
