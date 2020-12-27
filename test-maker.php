@@ -25,6 +25,9 @@ class TestMaker {
 
 		$admin = new Admin();
 
+		add_action( 'wp_ajax_crb_login_user', array('App\Test\CrbUser', 'Login') );
+		add_action( 'wp_ajax_nopriv_crb_login_user', array('App\Test\CrbUser', 'Login') );
+
 		add_action( 'wp_ajax_crb_is_user_logged_in', 'crb_is_user_logged_in' );
 		add_action( 'wp_ajax_nopriv_crb_is_user_logged_in', 'crb_is_user_logged_in' );
 
