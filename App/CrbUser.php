@@ -2,10 +2,8 @@
 namespace App\Test;
 
 class CrbUser {
-	private $email;
-	private $password;
 
-	public static function Login() {
+	public static function login() {
 		$emailOrUsername = ! empty( $_POST['emailOrUsername'] ) ? $_POST['emailOrUsername'] : '';
 		$password = ! empty( $_POST['password'] ) ? $_POST['password'] : '';
 
@@ -20,4 +18,33 @@ class CrbUser {
 		] );
 	}
 
+	public static function register() {
+		$username = ! empty( $_POST['userName'] ) ? $_POST['userName'] : '';
+		$email = ! empty( $_POST['email'] ) ? $_POST['email'] : '';
+		$password = ! empty( $_POST['password'] ) ? $_POST['password'] : '';
+
+		$firstName = ! empty( $_POST['firstName'] ) ? $_POST['firstName'] : '';
+		$lastName = ! empty( $_POST['lastName'] ) ? $_POST['lastName'] : '';
+
+		$userData = [
+			'userName' => ! empty( $_POST['userName'] ) ? $_POST['userName'] : '',
+			'email' => ! empty( $_POST['email'] ) ? $_POST['email'] : '',
+			'password' => ! empty( $_POST['password'] ) ? $_POST['password'] : '',
+			'firstName' => ! empty( $_POST['firstName'] ) ? $_POST['firstName'] : '',
+			'lastName' => ! empty( $_POST['lastName'] ) ? $_POST['lastName'] : '',
+		];
+
+		$user = wp_insert_user( array(
+			'user_pass' => $password,
+			'user_login' => $username,
+			'user_email' => $email,
+			'first_name' => $firstName,
+			'last_name' => $lastName,
+			'role' => 'subscriber'
+		) );
+
+		wp_send_json_success( [
+			'user' => $user,
+		] );
+	}
 }

@@ -2,7 +2,7 @@
 	<div class="section section-popup">		
 		<div v-show="showRegisterPopup" class="popup-modal">
 			<div class="popup-modal-container">
-				<form class="popup-modal-form">
+				<form v-on:submit.prevent class="popup-modal-form">
 					<div class="popup-modal__head">
 						<h2 class="popup-modal__title">Създай Акаунт</h2><!-- popup-modal__title -->
 					</div><!-- popup-modal__head -->
@@ -71,7 +71,27 @@ export default {
 			this.$store.commit('reverseLoginPopup');
 		},
 		register: function() {
+			var data = new FormData();
 
+			data.append('action', 'crb_register_user');
+			data.append('userName', this.userName);
+			data.append('email', this.email);
+			data.append('firstName', this.firstName);
+			data.append('lastName', this.lastName);
+			data.append('password', this.password);
+
+			var $promise = axios({
+				method: 'post',
+				url: crb_site_utils.ajaxurl,
+				data: data
+			})
+			.then((response) => {
+				console.log(response);
+				// location.reload();
+			})
+			.catch(function (error) {
+				console.log(error);
+			});
 		}
 	},
 	computed: {

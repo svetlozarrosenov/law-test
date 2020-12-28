@@ -2,7 +2,7 @@
 	<div class="section section-popup">		
 		<div v-show="showLoginPopup" class="popup-modal">
 			<div class="popup-modal-container">
-				<form class="popup-modal-form">
+				<form v-on:submit.prevent class="popup-modal-form">
 					<div class="popup-modal__head">
 						<h2 class="popup-modal__title">Вход</h2><!-- popup-modal__title -->
 					</div><!-- popup-modal__head -->
