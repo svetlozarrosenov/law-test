@@ -28,19 +28,16 @@ class Admin {
 
 	public function loadAssets() {
 		add_action('wp_enqueue_scripts', function() {
-			if ( is_singular( 'crb_test' ) ) {
-        		wp_enqueue_style('test-maker-css', plugins_url('assets/dist/css/all.min.css',dirname(__FILE__)));
+    		wp_enqueue_style('test-maker-css', plugins_url('assets/dist/css/all.min.css',dirname(__FILE__)));
 
-				wp_enqueue_script('test-maker-stripe', 'https://js.stripe.com/v3/', [], false, true);
+			wp_enqueue_script('test-maker-stripe', 'https://js.stripe.com/v3/', [], false, true);
 
-        		wp_enqueue_script('test-maker-js', plugins_url('assets/dist/js/main.js',dirname(__FILE__)), ['test-maker-stripe'], false, true);
+    		wp_enqueue_script('test-maker-js', plugins_url('assets/dist/js/main.js',dirname(__FILE__)), ['test-maker-stripe'], false, true);
 
-        		wp_localize_script( 'test-maker-js', 'crb_site_utils', [
-					'ajaxurl' => admin_url( 'admin-ajax.php'),
-					'postID' => get_the_ID()
-				] );
-
-			}
+    		wp_localize_script( 'test-maker-js', 'crb_site_utils', [
+				'ajaxurl' => admin_url( 'admin-ajax.php'),
+				'postID' => get_the_ID()
+			] );
 		} );
 	}
 

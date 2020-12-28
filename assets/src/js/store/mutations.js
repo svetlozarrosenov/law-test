@@ -10,6 +10,9 @@ var mutations = {
 
 		state.testTime.setMinutes(state.initialTime.getMinutes() + payload.time);		
 	},
+	currentUserStatus(state, payload) {
+		state.currentUserLoggedIn = payload.userStatus;
+	},
 	reverseRegisterPopup(state, payload) {
 		state.showRegisterPopup = !state.showRegisterPopup;
 	},

@@ -19,7 +19,7 @@ var getters = {
 	},
 	showLoginPopup(state) {
 		return state.showLoginPopup;
-	},
+	}
 
 };
 

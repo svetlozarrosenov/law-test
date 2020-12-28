@@ -1,36 +1,46 @@
 <template>
 	<div class="section section-popup">		
 		<div v-show="showRegisterPopup" class="popup-modal">
-			<div class="popup-modal__info-box">
-				<div class="popup-modal__head">
-					<h2 class="popup-modal__title">Създай Акаунт</h2><!-- popup-modal__title -->
-				</div><!-- popup-modal__head -->
+			<div class="popup-modal-container">
+				<form class="popup-modal-form">
+					<div class="popup-modal__head">
+						<h2 class="popup-modal__title">Създай Акаунт</h2><!-- popup-modal__title -->
+					</div><!-- popup-modal__head -->
 
-				<div class="popup-modal__body">
-					<p>
-						<input type="text" name="username" placeholder="Име">
-					</p>
+					<div class="popup-modal__body">
+						<p>
+							<input type="text" name="userName" v-model="userName" placeholder="Потребителско име">
+						</p>
+						
+						<p>
+							<input type="text" name="firstName" v-model="firstName" placeholder="Име">
+						</p>
+						
+						<p>
+							<input type="text" name="lastName" v-model="lastName" placeholder="Фамилия">
+						</p>
 
-					<p>
-						<input type="email" name="email" placeholder="Имейл">
-					</p>
+						<p>
+							<input type="email" name="email" v-model="email" placeholder="Имейл">
+						</p>
 
-					<p>
-						<input type="password" name="password" placeholder="Парола">
-					</p>
+						<p>
+							<input type="password" name="password" v-model="password" placeholder="Парола">
+						</p>
 
-					<p>
-						<input type="password" name="confirmpassword" placeholder="Потвърди Парола">
-					</p>
+						<p>
+							<input type="password" name="confirmPassword" v-model="confirmPassword" placeholder="Потвърди Парола">
+						</p>
 
-					<p>
-						<button>Регистрация</button>
-					</p>					
-				</div><!-- popup-modal__body -->
+						<p>
+							<button class="popup-form__btn" @click="register">Регистрация</button>
+						</p>					
+					</div><!-- popup-modal__body -->
 
-				<div class="popup-modal__foot">
-					<span>Вече имате регистрация?</span> <button @click="showLoginPopup">Влезте в профила си</button>
-				</div><!-- popup-modal__foot -->
+				</form><!-- popup-modal-form -->	
+					<div class="popup-modal-container__foot">
+						<span>Вече имаш регистрация?</span> <button @click="showLoginPopup">Влез в профила си</button>
+					</div><!-- popup-modal__foot -->
 			</div><!-- info-box -->
 		</div><!-- popup-modal -->
 	</div><!-- section-home -->
@@ -42,37 +52,27 @@ import axios from 'axios';
 export default {
 	data() {
 		return {
-			userIsLoggedIn: false,
+			userName: '',
+			firstName: '',
+			lastName: '',
+			email: '',
+			password: '',
+			confirmPassword: '',
 		}
 	},
 	methods: {
-		showModalAfterDelay: function(delay) {
+		showModalAfterDelay: function() {
 			setTimeout(()=>{  
 				this.$store.commit('reverseRegisterPopup');
-			}, delay);
+			});
 		},
 		showLoginPopup: function() {
 			this.$store.commit('reverseRegisterPopup');
 			this.$store.commit('reverseLoginPopup');
+		},
+		register: function() {
+
 		}
-	},
-	mounted: function(){
-		var data = new FormData();
-		data.append('action', 'crb_is_user_logged_in');
-
-		var $promise = axios({
-			method: 'post',
-			url: crb_site_utils.ajaxurl,
-			data: data
-		})
-		.then((response) => {
-			this.userIsLoggedIn = response.data.data.is_logged_in;
-
-			this.showModalAfterDelay(1000);
-		})
-		.catch(function (error) {
-			console.log(error);
-		});
 	},
 	computed: {
 		domain() {

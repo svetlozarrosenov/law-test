@@ -3,6 +3,7 @@ var data = {
 	currentQuestion: {},
 	showRegisterPopup: false,
 	showLoginPopup: false,
+	currentUserLoggedIn: false,
 	domain: '',
 	rightAnswers: 0,
 	initialTime: false,
