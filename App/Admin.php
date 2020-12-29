@@ -7,6 +7,12 @@ use Carbon_Fields\Field\Field;
 class Admin {
 	
 	public function __construct() {
+		add_filter( 'body_class', function( $classes, $class ) {
+			$classes[] = 'products-page';
+
+			return $classes;
+		}, 10, 2 );
+
 		$this->bootCarbonfields();
 		$this->createCustomPostTypeTemplate();
 		$this->loadAssets();

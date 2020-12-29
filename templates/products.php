@@ -15,13 +15,15 @@ $productsLoop = new WP_Query( array(
 ?>
 <div class="main">
 	<div class="container">
-		<div class="products">
-			<?php
-			Loader::render( 'products/product', array(
-				'productsLoop' => $productsLoop
-			) );
-			?>
-		</div><!-- products -->
+		<div class="shell">
+			<div class="products">
+				<?php
+				Loader::render( 'products/product', array(
+					'productsLoop' => $productsLoop
+				) );
+				?>
+			</div><!-- products -->
+		</div><!-- shell -->
 	</div><!-- container -->
 </div><!-- main -->
 

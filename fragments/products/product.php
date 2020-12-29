@@ -2,6 +2,15 @@
 if ( ! $productsLoop->have_posts() ) {
 	return;
 }
+
+$checkout = null;
+$pages = get_pages(array(
+    'meta_key' => '_wp_page_template',
+    'meta_value' => 'test-checkout.php'
+));
+if(isset($pages[0])) {
+    $checkout = get_page_link($pages[0]->ID);
+}
 ?>
 
 <?php while ( $productsLoop->have_posts() ) : $productsLoop->the_post(); ?>
@@ -10,6 +19,7 @@ if ( ! $productsLoop->have_posts() ) {
 		'title' => get_the_title(),
 		'price' => carbon_get_the_post_meta('crb_product_price'),
 		'features' => carbon_get_the_post_meta('crb_product_features'),
+		'checkout' => $checkout .= '?productID=' . get_the_ID()
 	];
 	?>
 	<div class="product">
@@ -22,7 +32,7 @@ if ( ! $productsLoop->have_posts() ) {
 				<h2 class="product__price"><?php ?><?php echo esc_html( $product['price'] . 'лв.' ); ?></h2><!-- product__price -->
 			<?php endif; ?>
 
-			<a href="#">Поръчай</a>
+			<a href="<?php echo $product['checkout']; ?>">Поръчай</a>
 		</div><!-- product__head -->
 
 		<div class="product__body">
