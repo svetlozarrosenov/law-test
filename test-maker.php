@@ -44,6 +44,9 @@ class TestMaker {
 
 		add_action( 'wp_ajax_crb_ajax_get_questions', array( 'App/Test/Test', 'getQuestions' ) );
 		add_action( 'wp_ajax_nopriv_crb_ajax_get_questions', array( 'App/Test/Test', 'getQuestions' ) );
+
+		add_action( 'wp_ajax_crb_ajax_is_test_page', array( 'App/Test/Test', 'isTestPage' ) );
+		add_action( 'wp_ajax_nopriv_crb_ajax_is_test_page', array( 'App/Test/Test', 'isTestPage' ) );
 	}
 
 	public function activate() {

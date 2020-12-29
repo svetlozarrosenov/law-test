@@ -19,6 +19,9 @@ var getters = {
 	},
 	showLoginPopup(state) {
 		return state.showLoginPopup;
+	},
+	isTestPage(state) {
+		return state.isTestPage;
 	}
 
 };

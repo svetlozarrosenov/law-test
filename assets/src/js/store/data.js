@@ -8,6 +8,7 @@ var data = {
 	rightAnswers: 0,
 	initialTime: false,
 	testTime: false,
+	isTestPage: false,
 };
 
 export default data;

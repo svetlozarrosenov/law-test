@@ -4,7 +4,7 @@ namespace App\Test;
 class Loader {
 	private static $pluginName = 'test-maker';
 
-	private static $viewsDir = WP_PLUGIN_DIR . DIRECTORY_SEPARATOR . 'test-maker' . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR;
+	private static $viewsDir = WP_PLUGIN_DIR . DIRECTORY_SEPARATOR . 'test-maker' . DIRECTORY_SEPARATOR . 'fragments' . DIRECTORY_SEPARATOR;
 
 	public static function render( $view, $context = [] ) {
 		extract( $context );

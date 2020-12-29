@@ -10,14 +10,13 @@ class Admin {
 		$this->bootCarbonfields();
 		$this->createCustomPostTypeTemplate();
 		$this->loadAssets();
+		$this->addCustomTemplates();
 	}	
 
 	public function bootCarbonfields() {
 		add_action( 'after_setup_theme', function(){
 			
 			\Carbon_Fields\Carbon_Fields::boot();			
-
-			// add_action( 'carbon_fields_register_fields', array($this, 'createTestMeta') );
 			
 			$this->createPostTypes()
 				->createTaxonomies()
@@ -94,6 +93,35 @@ class Admin {
 			'_edit_link' => 'post.php?post=%d',
 			'rewrite' => array(
 				'slug' => 'juridical-question',
+				'with_front' => false,
+			),
+			'query_var' => true,
+			'menu_icon' => 'dashicons-plus',
+			'supports' => array( 'title', 'editor', 'page-attributes', 'thumbnail' ),
+		) );
+
+		register_post_type( 'crb_product', array(
+			'labels' => array(
+				'name' => __( 'Product', 'crb' ),
+				'singular_name' => __( 'Product', 'crb' ),
+				'add_new' => __( 'Add New', 'crb' ),
+				'add_new_item' => __( 'Add new Product', 'crb' ),
+				'view_item' => __( 'View Product', 'crb' ),
+				'edit_item' => __( 'Edit Product', 'crb' ),
+				'new_item' => __( 'New Product', 'crb' ),
+				'view_item' => __( 'View Product', 'crb' ),
+				'search_items' => __( 'Search Product', 'crb' ),
+				'not_found' =>  __( 'No products found', 'crb' ),
+				'not_found_in_trash' => __( 'No products found in trash', 'crb' ),
+			),
+			'public' => true,
+			'exclude_from_search' => false,
+			'show_ui' => true,
+			'capability_type' => 'post',
+			'hierarchical' => false,
+			'_edit_link' => 'post.php?post=%d',
+			'rewrite' => array(
+				'slug' => 'product',
 				'with_front' => false,
 			),
 			'query_var' => true,
@@ -179,6 +207,18 @@ class Admin {
 					->set_layout('tabbed-vertical'),
 			) );
 
+			Container::make( 'post_meta', __( 'Product Settings', 'crb' ) )
+				->where( 'post_type', '=', 'crb_product' )
+				->add_fields( array(
+					Field::make( 'text', 'crb_product_price', __( 'Price', 'crb' ) ),
+					Field::make( 'complex', 'crb_product_features', __( 'Features', 'crb' ) )
+						->add_fields( array(
+							Field::make( 'text', 'title', __( 'Title', 'crb' ) ),
+						) )
+						->set_layout('tabbed-vertical')
+						->set_header_template('<%- title %>')
+				) );
+
 		return $this;
 	}
 	public function createUserMeta() {
@@ -188,8 +228,31 @@ class Admin {
 		        Field::make( 'text', 'crb_user_start_date', __( 'Start Date', 'crb' ) ),
 		        Field::make( 'text', 'crb_user_end_date', __( 'End Date', 'crb' ) ),
 		        Field::make( 'text', 'crb_user_order_status', __( 'Order Status', 'crb' ) ),
+		        Field::make( 'checkbox', 'crb_user_subscription_status', __( 'Active Subscription', 'crb' ) ),
 		    ) );
 		    
 		return $this;
+	}
+	public function addCustomTemplates() {
+		add_filter( 'page_template', function( $page_template ) {
+		    if ( get_page_template_slug() == 'test-checkout.php' ) {
+		        $page_template = dirname( __FILE__ ) . '../../templates/checkout.php';
+		    }
+
+		    if ( get_page_template_slug() == 'products.php' ) {
+		        $page_template = dirname( __FILE__ ) . '../../templates/products.php';
+		    }
+
+		    return $page_template;
+		} );
+
+		add_filter( 'theme_page_templates', function( $post_templates, $wp_theme, $post, $post_type ) {
+		    // Add custom template named template-custom.php to select dropdown 
+		    $post_templates['test-checkout.php'] = __( 'Test Checkout Page', 'crb' );
+
+		    $post_templates['products.php'] = __( 'Products', 'crb' );
+
+		    return $post_templates;
+		}, 10, 4 );
 	}
 }

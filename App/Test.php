@@ -5,7 +5,9 @@ class Test {
 
 	public function __construct() {
 		add_action('wp_footer', function() {
-			echo '<div id="app"></div>';
+			if ( ! get_page_template_slug() == 'products.php' && ! is_singular('crb_test') ) {
+				echo '<div id="app"></div>';
+			}
 		});
 	}
 

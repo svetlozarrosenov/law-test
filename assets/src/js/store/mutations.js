@@ -10,6 +10,9 @@ var mutations = {
 
 		state.testTime.setMinutes(state.initialTime.getMinutes() + payload.time);		
 	},
+	isTestPage(state, payload) {
+		state.isTestPage = payload.isTestPage;
+	},
 	currentUserStatus(state, payload) {
 		state.currentUserLoggedIn = payload.userStatus;
 	},

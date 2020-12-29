@@ -1,16 +1,28 @@
 <?php
 /**
- * Template Name: Paywall Products
+ * Template Name: Products
  */
 
-use App\Paywall\Subscription;
+use App\Test\Loader;
 
-get_header(); the_post();
+get_header(); the_post(); ?>
 
-$user = wp_get_current_user();
-$product = 5;
-$plans = [2];
+<?php
+$productsLoop = new WP_Query( array(
+	'post_type' => 'crb_product',
+	'posts_per_page' => 3,
+) );
+?>
+<div class="main">
+	<div class="container">
+		<div class="products">
+			<?php
+			Loader::render( 'products/product', array(
+				'productsLoop' => $productsLoop
+			) );
+			?>
+		</div><!-- products -->
+	</div><!-- container -->
+</div><!-- main -->
 
-$subscription = new Subscription( $user, $product, $plans );
-
-get_footer();
+<?php get_footer();

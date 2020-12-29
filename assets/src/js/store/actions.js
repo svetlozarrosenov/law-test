@@ -51,6 +51,23 @@ var actions = {
 			console.log(error);
 		});
 
+		var data = new FormData();
+
+		data.append('action', 'crb_ajax_is_test_page');
+		var $promise = axios({
+			method: 'post',
+			url: crb_site_utils.ajaxurl,
+			data: data
+		})
+		.then((response) => {
+			commit({
+				type: 'isTestPage',
+				isTestPage: response.data.data.is_test_page
+			});
+		})
+		.catch(function (error) {
+			console.log(error);
+		});
 		return $promise;
 	},
 	startTest({commit, getters, state}) {
