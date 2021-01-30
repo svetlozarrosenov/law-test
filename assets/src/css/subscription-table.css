@@ -59,11 +59,16 @@
   popup-modal-container
 \* ------------------------------------------------------------ */
 
-.popup-modal-container { width: 50%; margin: 0 auto; background-color: #fff; border-radius: 30px; }
+.popup-modal-container { width: 390px; margin: 0 auto; margin-top: 50px; background-color: #fff; }
 
-.popup-modal-container .popup-modal-container__foot { padding: 15px; background-color: #f6f6f7; border-radius: 30px; }
+.popup-modal-container .popup-modal-container__head { padding: 20px 0; background-color: #0088cc; }
+
+.popup-modal-container .popup-modal-container__title { font-size: 20px; color: #fff; text-align: center; }
+
+.popup-modal-container .popup-modal-container__foot { padding: 15px; }
 .popup-modal-container .popup-modal-container__foot span { padding: 10px; }
-.popup-modal-container button { background: #14b0f2; }
+.popup-modal-container .popup-modal-container__foot a { color: #08c; }
+.popup-modal-container button { background: #0088cc; }
 
 /* ------------------------------------------------------------ *\
   popup-modal-form
@@ -71,15 +76,15 @@
 
 .popup-modal-form { width: 90%; margin: 0 auto; padding: 10px; box-shadow: none; }
 
-.popup-modal-form p input { border: none; border-bottom: 1px solid #F0F0F0; }
-.popup-modal-form p input:focus { border: none; border-bottom: 1px solid #14b0f2; }
+.popup-modal-form p input { border: none; border-bottom: 1px solid #F0F0F0; width: 100%; }
+.popup-modal-form p input:focus { border: none; border-bottom: 1px solid #0088cc; }
 .popup-modal-form p input[type="text"], .popup-modal-form p input[type="password"], .popup-modal-form p input[type="email"], .popup-modal-form p textarea, .popup-modal-form p select { 
     outline: none !important;
 }
 
 .popup-modal-form .popup-modal__title { margin: 0; }
 
-.popup-modal-form .popup-form__btn { display: block; max-width: 260px; margin: 0 auto; }
+.popup-modal-form .popup-form__btn { display: block; width: 90%; margin: 20px auto; padding: 15px 0; color: #fff; border: none; }
 
 /* ------------------------------------------------------------ *\
   main
@@ -104,6 +109,6 @@
 
 .product .product__head { min-height: 200px; background-size: cover; background-position: center; }
 
-.product h1, .product h2, .product h3, .product a { text-align: center; color: #14b0f2; }
+.product h1, .product h2, .product h3, .product a { text-align: center; color: #0088cc; }
 
 .product .product__title { margin-top: 0; }

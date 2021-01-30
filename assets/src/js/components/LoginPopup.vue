@@ -2,11 +2,11 @@
 	<div class="section section-popup">		
 		<div v-show="showLoginPopup" class="popup-modal">
 			<div class="popup-modal-container">
-				<form v-on:submit.prevent class="popup-modal-form">
-					<div class="popup-modal__head">
-						<h2 class="popup-modal__title">Вход</h2><!-- popup-modal__title -->
-					</div><!-- popup-modal__head -->
+				<div class="popup-modal-container__head">
+					<h2 class="popup-modal-container__title">Вход</h2><!-- popup-modal__title -->
+				</div><!-- popup-modal__head -->
 
+				<form v-on:submit.prevent class="popup-modal-form">
 					<div class="popup-modal__body">
 						<p>
 							<input type="text" name="emailOrUsername" v-model="emailOrUsername" placeholder="Потребителско име или имейл">
@@ -23,7 +23,7 @@
 
 				</form><!-- popup-modal-form -->	
 					<div class="popup-modal-container__foot">
-						<span>Нямаш регистрация?</span> <button @click="showRegisterPopup">Регистрирай се</button>
+						<span>Нямаш регистрация?</span> <a @click="showRegisterPopup">Регистрирай се</a>
 					</div><!-- popup-modal__foot -->
 			</div><!-- info-box -->
 		</div><!-- popup-modal -->
