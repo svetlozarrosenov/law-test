@@ -15,6 +15,10 @@ use Carbon_Fields\Container\Container;
 use Carbon_Fields\Field\Field;
 use App\Test\Admin;
 
+define( 'TEST_MAKER_VERSION', '1.1.0' );
+define( 'TEST_MAKER_URL', plugin_dir_url( __FILE__ ) );
+define( 'TEST_MAKER_PATH', plugin_dir_path( __FILE__ ) );
+
 class TestMaker {
 	public function __construct() {
 		require 'vendor/autoload.php';

@@ -176,7 +176,7 @@ class Admin {
 	public function createCustomPostTypeTemplate() {
 		add_filter('template_include', function( $template ) {
 		    $post_types = array('crb_test');
-
+		    
 		    if ( is_singular( $post_types ) ) {
 		        $template = Loader::render('single-test-page');
 		    }
