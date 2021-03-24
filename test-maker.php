@@ -11,9 +11,15 @@ Version 1.0.0
 if ( ! defined( 'ABSPATH' ) ) {
 	die;
 }
+
 use Carbon_Fields\Container\Container;
 use Carbon_Fields\Field\Field;
-use App\Test\Admin;
+
+use LawtestManager\TestPackage\Admin;
+use LawtestManager\TestPackage\CrbUser;
+use LawtestManager\TestPackage\Loader;
+use LawtestManager\TestPackage\Paywall;
+use LawtestManager\TestPackage\Test;
 
 define( 'TEST_MAKER_VERSION', '1.1.0' );
 define( 'TEST_MAKER_URL', plugin_dir_url( __FILE__ ) );
@@ -24,33 +30,14 @@ class TestMaker {
 		require 'vendor/autoload.php';
 
 		// add_action('after_setup_theme', function() {
-		// 	new App\Test\Paywall();
+		// 	new Paywall();
 		// } );
 
-		$admin = new Admin();
+		new Admin();
 		
-		new App\Test\Test();
+		new Test();
 
-		add_action( 'wp_ajax_crb_login_user', array('App\Test\CrbUser', 'login') );
-		add_action( 'wp_ajax_nopriv_crb_login_user', array('App\Test\CrbUser', 'login') );
-
-		add_action( 'wp_ajax_crb_register_user', array('App\Test\CrbUser', 'register') );
-		add_action( 'wp_ajax_nopriv_crb_register_user', array('App\Test\CrbUser', 'register') );
-
-		add_action( 'wp_ajax_crb_is_user_logged_in', 'crb_is_user_logged_in' );
-		add_action( 'wp_ajax_nopriv_crb_is_user_logged_in', 'crb_is_user_logged_in' );
-
-		function crb_is_user_logged_in() {
-			wp_send_json_success( [
-        		'is_logged_in' => \is_user_logged_in(),
-  			] );
-		}
-
-		add_action( 'wp_ajax_crb_ajax_get_questions', array( 'App/Test/Test', 'getQuestions' ) );
-		add_action( 'wp_ajax_nopriv_crb_ajax_get_questions', array( 'App/Test/Test', 'getQuestions' ) );
-
-		add_action( 'wp_ajax_crb_ajax_is_test_page', array( 'App/Test/Test', 'isTestPage' ) );
-		add_action( 'wp_ajax_nopriv_crb_ajax_is_test_page', array( 'App/Test/Test', 'isTestPage' ) );
+		new CrbUser();
 	}
 
 	public function activate() {

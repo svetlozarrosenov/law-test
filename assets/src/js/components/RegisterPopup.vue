@@ -86,7 +86,6 @@ export default {
 				data: data
 			})
 			.then((response) => {
-				console.log(response);
 				// location.reload();
 			})
 			.catch(function (error) {

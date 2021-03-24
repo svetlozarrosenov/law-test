@@ -1,5 +1,5 @@
 <?php
-namespace App\Admin;
+namespace LawtestManager\AdminPackage;
 
 class PostTypes {
 

@@ -61,8 +61,7 @@
 		},
 		computed: {
 			test: function() {
-				let test = this.$store.state.questions;
-
+				let test = this.$store.state.test.questions;
 				return test;
 			},
 			rightAnswers: function() {

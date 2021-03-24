@@ -1,7 +1,15 @@
 <?php
-namespace App\Test;
+namespace LawtestManager\TestPackage;
 
 class CrbUser {
+
+	public function __construct() {
+		add_action( 'wp_ajax_crb_login_user', array('LawtestManager\TestPackage\CrbUser', 'login') );
+		add_action( 'wp_ajax_nopriv_crb_login_user', array('LawtestManager\TestPackage\CrbUser', 'login') );
+
+		add_action( 'wp_ajax_crb_register_user', array('LawtestManager\TestPackage\CrbUser', 'register') );
+		add_action( 'wp_ajax_nopriv_crb_register_user', array('LawtestManager\TestPackage\CrbUser', 'register') );
+	}
 
 	public static function login() {
 		$emailOrUsername = ! empty( $_POST['emailOrUsername'] ) ? $_POST['emailOrUsername'] : '';

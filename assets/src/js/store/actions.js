@@ -3,19 +3,44 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 
 var actions = {
-	getTest({commit, getters, state}){
+	startApp({commit, getters, state}){
 		var data = new FormData();
 
-		data.append('action', 'crb_ajax_get_questions');
+		data.append('action', 'crb_ajax_start_app');
 		data.append('postID', crb_site_utils.postID);
-
+		
 		var $promise = axios({
 			method: 'post',
 			url: crb_site_utils.ajaxurl,
 			data: data
 		})
 		.then((response) => {
+			console.log('crb_here');
 			console.log(response);
+			commit({
+				type: 'startApp',
+				questions: response.data.data.test.questions,
+				isTestPage: response.data.data.isTestPage,
+				isProductPage: response.data.data.isProductPage,
+				isLoggedIn: response.data.data.isLoggedIn,
+			});
+		})
+		.catch(function (error) {
+			console.log(error);
+		});
+	},
+	getTest({commit, getters, state}){
+		var data = new FormData();
+
+		data.append('action', 'crb_ajax_get_questions');
+		data.append('postID', crb_site_utils.postID);
+		
+		var $promise = axios({
+			method: 'post',
+			url: crb_site_utils.ajaxurl,
+			data: data
+		})
+		.then((response) => {
 			commit({
 				type: 'setTest',
 				questions: response.data.data.questions,
@@ -72,7 +97,7 @@ var actions = {
 	},
 	startTest({commit, getters, state}) {
 		setInterval(function(){ 
-			state.testTime - 1000; 
+			state.test.testTime - 1000; 
 		}, 1000);
 	}
 }

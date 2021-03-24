@@ -3,7 +3,7 @@ import App from './App.vue';
 import store from './store/state';
 import paywall from './paywall';
 
-store.dispatch('getTest');
+store.dispatch('startApp');
 
 new Vue({
 	store,

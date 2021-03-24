@@ -28,7 +28,6 @@ function paywall () {
 				}
 			}
 		}).then(function(result) {
-				console.log(result);
 			if (result.error) {
 				// Show error to your customer (e.g., insufficient funds)
 				console.log(result.error.message);

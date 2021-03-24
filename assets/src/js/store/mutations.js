@@ -1,20 +1,15 @@
 var mutations = {
-	setTest(state, payload){
-		state.questions = payload.questions;
-		state.domain = payload.domain;
-		state.currentQuestion = state.questions[0];
-
-		state.initialTime = new Date("1971/01/01 00:00:00");
-
-		state.testTime = new Date( state.initialTime );
-
-		state.testTime.setMinutes(state.initialTime.getMinutes() + payload.time);		
-	},
-	isTestPage(state, payload) {
+	startApp(state, payload){
 		state.isTestPage = payload.isTestPage;
-	},
-	currentUserStatus(state, payload) {
-		state.currentUserLoggedIn = payload.userStatus;
+		state.test.questions = payload.questions;
+		state.test.domain = payload.domain;
+		state.test.currentQuestion = state.test.questions[0];
+
+		state.test.initialTime = new Date("1971/01/01 00:00:00");
+
+		state.test.testTime = new Date( state.test.initialTime );
+
+		state.test.testTime.setMinutes(state.test.initialTime.getMinutes() + payload.time);		
 	},
 	reverseRegisterPopup(state, payload) {
 		state.showRegisterPopup = !state.showRegisterPopup;
@@ -29,31 +24,31 @@ var mutations = {
 
 		if(payload.event.right_answer) {
 			payload.event.answer_class = 'right-answer';
-			state.rightAnswers++;
+			state.test.rightAnswers++;
 		}else{
 			payload.event.answer_class = 'wrong-answer';
 			this.commit('findRightAnswer', payload.index);
 		}
 
-		state.questions[payload.index].answered = true;
-		state.currentQuestion = state.questions[payload.index];
+		state.test.questions[payload.index].answered = true;
+		state.test.currentQuestion = state.test.questions[payload.index];
 	},
 	findRightAnswer(state, index) {
-		state.questions[index].answers.forEach((answer, index) => {
+		state.test.questions[index].answers.forEach((answer, index) => {
 			if(answer.right_answer){
 				answer.answer_class = 'right-answer';
 			}
 		});
 	},
 	nextQuestion(state, index) {
-		state.questions[index].show = false;
-		state.questions[index +1].show = true;
-		state.currentQuestion = state.questions[index +1];
+		state.test.questions[index].show = false;
+		state.test.questions[index +1].show = true;
+		state.test.currentQuestion = state.test.questions[index +1];
 	},
 	prevQuestion(state, index) {
-		state.questions[index].show = false;
-		state.questions[index -1].show = true;
-		state.currentQuestion = state.questions[index -1];
+		state.test.questions[index].show = false;
+		state.test.questions[index -1].show = true;
+		state.test.currentQuestion = state.test.questions[index -1];
 	},
 };
 

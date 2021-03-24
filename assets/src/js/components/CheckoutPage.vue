@@ -1,5 +1,5 @@
 <template>
-	<div class="test-container">
+	<div v-show="false" class="test-container">
 		<InfoPopup/>
 		
 		Време: {{countMinutes}}

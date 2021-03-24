@@ -1,5 +1,5 @@
 <?php
-namespace App\Test;
+namespace LawtestManager\TestPackage;
 
 class Paywall {
 	private $clientSecret;

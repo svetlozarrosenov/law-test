@@ -1,13 +1,11 @@
 var data = {
-	questions: [],
-	currentQuestion: {},
-	showRegisterPopup: false,
-	showLoginPopup: false,
-	currentUserLoggedIn: false,
-	domain: '',
-	rightAnswers: 0,
-	initialTime: false,
-	testTime: false,
+	test: {
+		questions: [],
+		currentQuestion: {},
+		rightAnswers: 0,
+		initialTime: false,
+		testTime: 0.00,
+	},
 	isTestPage: false,
 };
 

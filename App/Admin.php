@@ -1,5 +1,5 @@
 <?php
-namespace App\Test;
+namespace LawtestManager\TestPackage;
 
 use Carbon_Fields\Container\Container;
 use Carbon_Fields\Field\Field;

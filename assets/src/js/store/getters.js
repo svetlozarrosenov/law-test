@@ -3,16 +3,13 @@ var getters = {
 		return state.domain;
 	},
 	getCurrentQuestion(state) {
-		return state.currentQuestion;
+		return state.test.currentQuestion;
 	},
 	getRightAnswers(state) {
-		return state.rightAnswers;
+		return state.test.rightAnswers;
 	},
 	countMinutes(state) {
-		if ( !state.testTime ) {
-			return;
-		}
-		return  state.testTime.getHours() + ':' + state.testTime.getMinutes();
+		return  state.test.testTime;
 	},
 	showRegisterPopup(state) {
 		return state.showRegisterPopup;

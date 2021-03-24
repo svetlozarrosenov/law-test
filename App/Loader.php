@@ -1,5 +1,5 @@
 <?php
-namespace App\Test;
+namespace LawtestManager\TestPackage;
 
 class Loader {
 	public static function render( $view, $context = [] ) {

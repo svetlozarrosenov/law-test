@@ -57,7 +57,6 @@ export default {
 				data: data
 			})
 			.then((response) => {
-				console.log(response);
 				location.reload();
 			})
 			.catch(function (error) {
@@ -67,7 +66,6 @@ export default {
 	},
 	computed: {
 		domain() {
-			console.log('here');
 			let domain = this.$store.getters.getDomain;
 			return domain;
 		},

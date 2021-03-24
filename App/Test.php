@@ -1,5 +1,5 @@
 <?php
-namespace App\Test;
+namespace LawtestManager\TestPackage;
 
 class Test {
 
@@ -9,28 +9,40 @@ class Test {
 				echo '<div id="app"></div>';
 			}
 		});
+
+		add_action('wp_loaded', function() {
+			add_action( 'wp_ajax_crb_ajax_get_questions', array('LawtestManager\TestPackage\Test', 'getQuestions') );
+			add_action( 'wp_ajax_nopriv_crb_ajax_get_questions', array('LawtestManager\TestPackage\Test', 'getQuestions') );
+
+			add_action( 'wp_ajax_crb_ajax_start_app', array('LawtestManager\TestPackage\Test', 'startApp') );
+			add_action( 'wp_ajax_nopriv_crb_ajax_start_app', array('LawtestManager\TestPackage\Test', 'startApp') );
+		} );
 	}
 
-	public static function isTestPage() {
-		return is_singular( 'crb_test' );
+	public static function startApp() {
+		$test = self::getQuestions();
+
+		wp_send_json_success( [
+    		'isTestPage' => true,
+    		'isProductPage' => false, 
+    		'isLoggedIn' => false,
+    		'test' => [
+    			'questions' => $test['questions'],
+    			'domain' => get_site_url() . DIRECTORY_SEPARATOR,
+    			'time' => $testTime,
+    		],
+		] );
 	}
 
 	public static function getQuestions() {  
-		if ( ! self::isTestPage() ) {
-			wp_send_json_success( [
-    			'error' => 'not a test page',
-			] );
-
-			return;
-		}
 
 		$testID = isset( $_POST['postID'] ) ? $_POST['postID'] : false;
 
-		$numberOfQuestions = carbon_get_post_meta( $testID, 'crb_test_of_questions' );
+		$numberOfQuestions = \carbon_get_post_meta( $testID, 'crb_test_of_questions' );
 
-		$testTime = carbon_get_post_meta( $testID, 'crb_test_time' );
+		$testTime = \carbon_get_post_meta( $testID, 'crb_test_time' );
 
-		$terms = carbon_get_post_meta( $testID, 'crb_test_categories' );
+		$terms = \carbon_get_post_meta( $testID, 'crb_test_categories' );
 
 		if ( empty( $terms ) ) {
 			return false;
@@ -41,7 +53,7 @@ class Test {
 			$termIDs[] = $term['id'];
 		}
 
-		$questions_loop = new WP_Query( array(
+		$questions_loop = new \WP_Query( array(
 			'post_type' => 'crb_juridical_q',
 			'posts_per_page' => $numberOfQuestions,
 			'orderby' => 'rand',
@@ -83,10 +95,10 @@ class Test {
 
 		wp_reset_postdata();
 
-		wp_send_json_success( [
+		return [
     		'questions' => $questions,
     		'domain' => get_site_url() . DIRECTORY_SEPARATOR,
     		'time' => $testTime,
-		] );
+		];
 	}
 }
