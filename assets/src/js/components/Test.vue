@@ -2,7 +2,7 @@
 	<div v-show="isTestPage" class="test-container">
 		<InfoPopup/>
 		
-		Време: {{countMinutes}}
+		Време: {{getTime}}
 
 		<div class="test-step" v-show="question.show" v-for="( question, qIndex ) in test" :key="question.qIndex">
 			<div class="test-question-number">
@@ -23,6 +23,7 @@
 
 			<hr>
 
+			<button @click="startTest">Start</button>
 			<div class="test-step__actions">
 				<button v-show="qIndex > 0" @click="prevQuestion(qIndex)" class="btn-prev">Предишен</button>
 				
@@ -57,6 +58,13 @@
 			},
 			prevQuestion(index) {
 				this.$store.commit('prevQuestion', index);
+			},
+			startTest() {
+				console.log('here');
+				setInterval(() => { 
+						this.$store.commit('decreaseTime', {
+					}); 
+				}, 1000);
 			}
 		},
 		computed: {
@@ -69,10 +77,19 @@
 
 				return rightAnswers;
 			},
-			countMinutes: function() {
-				let minutesLeft = this.$store.getters.countMinutes;
+			getTime: function() {
+				let minutesLeft = this.$store.getters.getTime;
 
-				return minutesLeft;
+				let hours = minutesLeft.getHours();
+				hours = ("0" + hours).slice(-2);
+
+				let minutes = minutesLeft.getMinutes();
+				minutes = ("0" + minutes).slice(-2);
+
+				let seconds = minutesLeft.getSeconds();
+				seconds = ("0" + seconds).slice(-2);
+
+				return hours + ':' + minutes + ':' + seconds;
 			},
 			isTestPage: function() {
 				let isTestPage = this.$store.getters.isTestPage;

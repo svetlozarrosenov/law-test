@@ -198,7 +198,8 @@ class Admin {
 					) ),
 				Field::make( 'text', 'crb_test_of_questions', __( 'Number of Questions', 'crb' ) ),
 				Field::make( 'text', 'crb_test_time', __( 'Time', 'crb' ) )
-					->set_help_text('Should be in minutes', 'crb'),
+					->set_help_text('Should be in minutes', 'crb')
+					->set_default_value(60),
 			) );
 
 		Container::make( 'post_meta', __( 'Juridical Question Settings', 'crb' ) )

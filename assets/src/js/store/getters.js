@@ -8,7 +8,7 @@ var getters = {
 	getRightAnswers(state) {
 		return state.test.rightAnswers;
 	},
-	countMinutes(state) {
+	getTime(state) {
 		return  state.test.testTime;
 	},
 	showRegisterPopup(state) {

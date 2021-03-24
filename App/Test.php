@@ -11,16 +11,13 @@ class Test {
 		});
 
 		add_action('wp_loaded', function() {
-			add_action( 'wp_ajax_crb_ajax_get_questions', array('LawtestManager\TestPackage\Test', 'getQuestions') );
-			add_action( 'wp_ajax_nopriv_crb_ajax_get_questions', array('LawtestManager\TestPackage\Test', 'getQuestions') );
-
 			add_action( 'wp_ajax_crb_ajax_start_app', array('LawtestManager\TestPackage\Test', 'startApp') );
 			add_action( 'wp_ajax_nopriv_crb_ajax_start_app', array('LawtestManager\TestPackage\Test', 'startApp') );
 		} );
 	}
 
 	public static function startApp() {
-		$test = self::getQuestions();
+		$test = self::getTest();
 
 		wp_send_json_success( [
     		'isTestPage' => true,
@@ -28,13 +25,13 @@ class Test {
     		'isLoggedIn' => false,
     		'test' => [
     			'questions' => $test['questions'],
-    			'domain' => get_site_url() . DIRECTORY_SEPARATOR,
-    			'time' => $testTime,
+    			'domain' => $test['domain'],
+    			'testTime' => absint( $test['testTime'] ),
     		],
 		] );
 	}
 
-	public static function getQuestions() {  
+	public static function getTest() {  
 
 		$testID = isset( $_POST['postID'] ) ? $_POST['postID'] : false;
 
@@ -97,8 +94,7 @@ class Test {
 
 		return [
     		'questions' => $questions,
-    		'domain' => get_site_url() . DIRECTORY_SEPARATOR,
-    		'time' => $testTime,
+    		'testTime' => $testTime,
 		];
 	}
 }

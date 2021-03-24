@@ -1,15 +1,12 @@
 var mutations = {
 	startApp(state, payload){
 		state.isTestPage = payload.isTestPage;
-		state.test.questions = payload.questions;
-		state.test.domain = payload.domain;
+		state.test.questions = payload.test.questions;
 		state.test.currentQuestion = state.test.questions[0];
 
-		state.test.initialTime = new Date("1971/01/01 00:00:00");
+		let initialTime = new Date("1971/01/01 00:00:00");
 
-		state.test.testTime = new Date( state.test.initialTime );
-
-		state.test.testTime.setMinutes(state.test.initialTime.getMinutes() + payload.time);		
+		state.test.testTime = new Date( initialTime.getTime() + (payload.test.testTime*60*1000) );		
 	},
 	reverseRegisterPopup(state, payload) {
 		state.showRegisterPopup = !state.showRegisterPopup;
@@ -50,6 +47,11 @@ var mutations = {
 		state.test.questions[index -1].show = true;
 		state.test.currentQuestion = state.test.questions[index -1];
 	},
+	decreaseTime(state) {
+		state.test.testTime = new Date( state.test.testTime.getTime() - 1000 );		
+
+		console.log(state.test.testTime.getMinutes());
+	}
 };
 
 export default mutations;

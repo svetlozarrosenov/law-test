@@ -15,11 +15,13 @@ var actions = {
 			data: data
 		})
 		.then((response) => {
-			console.log('crb_here');
-			console.log(response);
 			commit({
 				type: 'startApp',
-				questions: response.data.data.test.questions,
+				test: {
+					questions: response.data.data.test.questions,
+					domain: response.data.data.test.questions,
+					testTime: response.data.data.test.testTime,
+				},
 				isTestPage: response.data.data.isTestPage,
 				isProductPage: response.data.data.isProductPage,
 				isLoggedIn: response.data.data.isLoggedIn,
@@ -44,8 +46,7 @@ var actions = {
 			commit({
 				type: 'setTest',
 				questions: response.data.data.questions,
-				domain: response.data.data.domain,
-				time: response.data.data.time,
+				time: response.data.data.testTime,
 			});
 		})
 		.catch(function (error) {
@@ -96,6 +97,7 @@ var actions = {
 		return $promise;
 	},
 	startTest({commit, getters, state}) {
+		console.log('here');
 		setInterval(function(){ 
 			state.test.testTime - 1000; 
 		}, 1000);
