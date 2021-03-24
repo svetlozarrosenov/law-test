@@ -48,9 +48,7 @@ var mutations = {
 		state.test.currentQuestion = state.test.questions[index -1];
 	},
 	decreaseTime(state) {
-		state.test.testTime = new Date( state.test.testTime.getTime() - 1000 );		
-
-		console.log(state.test.testTime.getMinutes());
+		state.test.testTime = new Date( state.test.testTime.getTime() - 1000 );
 	}
 };
 

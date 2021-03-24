@@ -23,8 +23,8 @@
 
 			<hr>
 
-			<button @click="startTest">Start</button>
-			<div class="test-step__actions">
+			<button v-show="!testIsStarted" @click="startTest">Start</button>
+			<div v-show="testIsStarted" class="test-step__actions">
 				<button v-show="qIndex > 0" @click="prevQuestion(qIndex)" class="btn-prev">Предишен</button>
 				
 				<button v-show="qIndex < test.length -1" @click="nextQuestion(qIndex)" class="btn-next">Следващ</button>
@@ -43,10 +43,15 @@
 		},
 		data() {
 			return {
+				testIsStarted: false,
 			}
 		},
 		methods: {
 			checkAnswer(event, index, question) {
+				if(!this.testIsStarted){
+					return;
+				}
+
 				this.$store.commit('checkAnswer', {
 					event,
 					index, 
@@ -60,7 +65,8 @@
 				this.$store.commit('prevQuestion', index);
 			},
 			startTest() {
-				console.log('here');
+				this.testIsStarted = true;
+
 				setInterval(() => { 
 						this.$store.commit('decreaseTime', {
 					}); 
