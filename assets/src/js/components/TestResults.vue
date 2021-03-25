@@ -4,7 +4,7 @@
 			<h2 class="test-results__title">Резултати</h2><!-- test-results__title -->
 			
 			<div class="test-results__right-answers">
-				Време: {{getTime}}
+				Оставащо време: {{getTime}}
 			</div><!-- test-step__right-answers -->
 
 			<div class="test-results__questions">
@@ -14,11 +14,19 @@
 			<div class="test-results__right-answers">
 				Верни отговори: {{rightAnswers}}
 			</div><!-- test-step__right-answers -->
+
+			<div class="test-actions">
+				<button @click="seeTheTest" class="btn btn--prev">Разгледай теста</button>
+				
+				<button @click="resetTest" class="btn btn--next">Опитай Отново</button>
+			</div><!-- test-actions -->
 		</div><!-- test-results -->		
 	</div><!-- test-container -->
 </template>
 
 <script>
+	import store from '../store/state';
+
 	export default {
 		name: 'app',
 		components: {
@@ -28,7 +36,13 @@
 			}
 		},
 		methods: {
-			
+			seeTheTest: function() {
+				this.$store.commit('showOrHideTest');
+				this.$store.commit('showOrHideTestResults');
+			},
+			resetTest: function() {
+				store.dispatch('startApp');
+			}
 		},
 		computed: {
 			getTime: function() {

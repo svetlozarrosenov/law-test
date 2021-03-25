@@ -59,6 +59,9 @@ var mutations = {
 	hideTest(state) {
 		state.showTest = false;
 	},
+	showOrHideTestResults(state) {
+		state.showTestResults = !state.showTestResults;
+	},
 	showTestResults(state) {
 		state.showTestResults = true;
 	}

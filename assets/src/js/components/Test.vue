@@ -2,7 +2,7 @@
 	<div v-show="showTest" class="test-container">
 		<InfoPopup/>
 		
-		Време: {{getTime}}
+		Оставащо време: {{getTime}}
 
 		<div class="test-step" v-show="question.show" v-for="( question, qIndex ) in test" :key="question.qIndex">
 			<div class="test-question-number">
@@ -32,7 +32,7 @@
 				
 				<button v-show="qIndex < test.length -1" @click="nextQuestion(qIndex)" class="btn btn--next">Следващ</button>
 
-				<button v-show="qIndex == test.length -1" @click="finishTheTest(qIndex)" class="btn btn--next">Предай</button>
+				<button v-show="qIndex == test.length -1" @click="finishTheTest" class="btn btn--next">Предай</button>
 			</div><!-- test-step__actions -->
 		</div><!-- test-step -->
 	</div><!-- test-container -->
@@ -70,15 +70,23 @@
 			prevQuestion(index) {
 				this.$store.commit('prevQuestion', index);
 			},
-			finishTheTest(index) {
-				this.$store.commit('showTestResults');
+			finishTheTest() {
+				this.$store.commit('showOrHideTestResults');
 				this.$store.commit('showOrHideTest');
 				clearInterval(this.testTime); 
 			},
 			startTest() {
 				this.testIsStarted = true;
 
-				this.testTime = setInterval(() => { 
+				this.testTime = setInterval(() => {
+						let currentTestTime = this.$store.getters.getTime;
+						let hours = new Date((currentTestTime.getTime() - 1000)).getHours();
+						console.log(hours);
+						if(hours === 23){
+							this.finishTheTest();
+							return;
+						}
+
 						this.$store.commit('decreaseTime', {
 					}); 
 				}, 1000);

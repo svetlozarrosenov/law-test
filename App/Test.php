@@ -17,10 +17,12 @@ class Test {
 	}
 
 	public static function startApp() {
+		$postType = get_post_type( $_POST['postID'] );
+
 		$test = self::getTest();
 
 		wp_send_json_success( [
-    		'showTest' => true,
+    		'showTest' => $postType === 'crb_test',
     		'isProductPage' => false, 
     		'isLoggedIn' => false,
     		'test' => [

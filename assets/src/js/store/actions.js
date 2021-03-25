@@ -15,6 +15,7 @@ var actions = {
 			data: data
 		})
 		.then((response) => {
+			console.log(response);
 			commit({
 				type: 'startApp',
 				test: {

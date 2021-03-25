@@ -41,7 +41,7 @@ class Admin {
 
     		wp_localize_script( 'test-maker-js', 'crb_site_utils', [
 				'ajaxurl' => admin_url( 'admin-ajax.php'),
-				'postID' => get_the_ID()
+				'postID' => get_the_ID(),
 			] );
 		} );
 	}
