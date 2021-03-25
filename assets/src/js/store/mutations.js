@@ -1,8 +1,10 @@
 var mutations = {
 	startApp(state, payload){
 		state.showTest = payload.showTest;
+		state.showTestResults = false;
 		state.test.questions = payload.test.questions;
 		state.test.currentQuestion = state.test.questions[0];
+		state.test.rightAnswers = 0;
 
 		let initialTime = new Date("1971/01/01 00:00:00");
 
