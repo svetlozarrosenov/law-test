@@ -22,7 +22,7 @@ var actions = {
 					domain: response.data.data.test.questions,
 					testTime: response.data.data.test.testTime,
 				},
-				isTestPage: response.data.data.isTestPage,
+				showTest: response.data.data.showTest,
 				isProductPage: response.data.data.isProductPage,
 				isLoggedIn: response.data.data.isLoggedIn,
 			});
@@ -87,8 +87,8 @@ var actions = {
 		})
 		.then((response) => {
 			commit({
-				type: 'isTestPage',
-				isTestPage: response.data.data.is_test_page
+				type: 'showTest',
+				showTest: response.data.data.is_test_page
 			});
 		})
 		.catch(function (error) {

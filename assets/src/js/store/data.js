@@ -6,7 +6,8 @@ var data = {
 		initialTime: false,
 		testTime: 0.00,
 	},
-	isTestPage: false,
+	showTest: false,
+	showTestResults: false,
 };
 
 export default data;

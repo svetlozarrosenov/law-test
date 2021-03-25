@@ -76,8 +76,8 @@
 				return minutesLeft;
 			},
 			isTestPage: function() {
-				let isTestPage = this.$store.getters.isTestPage;
-				return isTestPage;
+				let showTestPage = this.$store.getters.showTestPage;
+				return showTestPage;
 			}
 		}
 	}

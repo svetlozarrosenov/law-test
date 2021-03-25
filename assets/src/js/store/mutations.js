@@ -1,6 +1,6 @@
 var mutations = {
 	startApp(state, payload){
-		state.isTestPage = payload.isTestPage;
+		state.showTest = payload.showTest;
 		state.test.questions = payload.test.questions;
 		state.test.currentQuestion = state.test.questions[0];
 
@@ -49,6 +49,18 @@ var mutations = {
 	},
 	decreaseTime(state) {
 		state.test.testTime = new Date( state.test.testTime.getTime() - 1000 );
+	},
+	showOrHideTest(state) {
+		state.showTest = !state.showTest;
+	},
+	showTest(state) {
+		state.showTest = true;
+	},
+	hideTest(state) {
+		state.showTest = false;
+	},
+	showTestResults(state) {
+		state.showTestResults = true;
 	}
 };
 

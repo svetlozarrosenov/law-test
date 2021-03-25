@@ -20,7 +20,7 @@ class Test {
 		$test = self::getTest();
 
 		wp_send_json_success( [
-    		'isTestPage' => true,
+    		'showTest' => true,
     		'isProductPage' => false, 
     		'isLoggedIn' => false,
     		'test' => [

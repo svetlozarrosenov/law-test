@@ -1,5 +1,5 @@
 <template>
-	<div v-show="isTestPage" class="test-container">
+	<div v-show="showTest" class="test-container">
 		<InfoPopup/>
 		
 		Време: {{getTime}}
@@ -23,11 +23,16 @@
 
 			<hr>
 
-			<button v-show="!testIsStarted" @click="startTest">Start</button>
+			<div v-show="!testIsStarted" class="test-step__actions">
+				<button class="btn" @click="startTest">Започни теста</button>
+			</div><!-- test-step__actions -->
+			
 			<div v-show="testIsStarted" class="test-step__actions">
-				<button v-show="qIndex > 0" @click="prevQuestion(qIndex)" class="btn-prev">Предишен</button>
+				<button v-show="qIndex > 0" @click="prevQuestion(qIndex)" class="btn btn--prev">Предишен</button>
 				
-				<button v-show="qIndex < test.length -1" @click="nextQuestion(qIndex)" class="btn-next">Следващ</button>
+				<button v-show="qIndex < test.length -1" @click="nextQuestion(qIndex)" class="btn btn--next">Следващ</button>
+
+				<button v-show="qIndex == test.length -1" @click="finishTheTest(qIndex)" class="btn btn--next">Предай</button>
 			</div><!-- test-step__actions -->
 		</div><!-- test-step -->
 	</div><!-- test-container -->
@@ -44,6 +49,7 @@
 		data() {
 			return {
 				testIsStarted: false,
+				testTime: false
 			}
 		},
 		methods: {
@@ -64,10 +70,15 @@
 			prevQuestion(index) {
 				this.$store.commit('prevQuestion', index);
 			},
+			finishTheTest(index) {
+				this.$store.commit('showTestResults');
+				this.$store.commit('showOrHideTest');
+				clearInterval(this.testTime); 
+			},
 			startTest() {
 				this.testIsStarted = true;
 
-				setInterval(() => { 
+				this.testTime = setInterval(() => { 
 						this.$store.commit('decreaseTime', {
 					}); 
 				}, 1000);
@@ -84,22 +95,25 @@
 				return rightAnswers;
 			},
 			getTime: function() {
-				let minutesLeft = this.$store.getters.getTime;
+				let testStartTime = this.$store.getters.getTime;
+				if(!testStartTime){
+					return;
+				}
 
-				let hours = minutesLeft.getHours();
+				let hours = testStartTime.getHours();
 				hours = ("0" + hours).slice(-2);
 
-				let minutes = minutesLeft.getMinutes();
+				let minutes = testStartTime.getMinutes();
 				minutes = ("0" + minutes).slice(-2);
 
-				let seconds = minutesLeft.getSeconds();
+				let seconds = testStartTime.getSeconds();
 				seconds = ("0" + seconds).slice(-2);
 
 				return hours + ':' + minutes + ':' + seconds;
 			},
-			isTestPage: function() {
-				let isTestPage = this.$store.getters.isTestPage;
-				return isTestPage;
+			showTest: function() {
+				let showTest = this.$store.getters.showTest;
+				return showTest;
 			}
 		}
 	}
