@@ -33,4 +33,8 @@ class Paywall {
 		</form>
 		<?php
 	}
+
+	public function newPayment() {
+
+	}
 }

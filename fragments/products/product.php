@@ -1,4 +1,6 @@
 <?php
+get_header();
+
 if ( ! $productsLoop->have_posts() ) {
 	return;
 }

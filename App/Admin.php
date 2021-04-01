@@ -135,6 +135,35 @@ class Admin {
 			'supports' => array( 'title', 'editor', 'page-attributes', 'thumbnail' ),
 		) );
 
+		register_post_type( 'crb_order', array(
+			'labels' => array(
+				'name' => __( 'Order', 'crb' ),
+				'singular_name' => __( 'Order', 'crb' ),
+				'add_new' => __( 'Add New', 'crb' ),
+				'add_new_item' => __( 'Add new Order', 'crb' ),
+				'view_item' => __( 'View Order', 'crb' ),
+				'edit_item' => __( 'Edit Order', 'crb' ),
+				'new_item' => __( 'New Order', 'crb' ),
+				'view_item' => __( 'View Order', 'crb' ),
+				'search_items' => __( 'Search Order', 'crb' ),
+				'not_found' =>  __( 'No orders found', 'crb' ),
+				'not_found_in_trash' => __( 'No orders found in trash', 'crb' ),
+			),
+			'public' => true,
+			'exclude_from_search' => false,
+			'show_ui' => true,
+			'capability_type' => 'post',
+			'hierarchical' => false,
+			'_edit_link' => 'post.php?post=%d',
+			'rewrite' => array(
+				'slug' => 'product',
+				'with_front' => false,
+			),
+			'query_var' => true,
+			'menu_icon' => 'dashicons-plus',
+			'supports' => array( 'title', 'editor', 'page-attributes', 'thumbnail' ),
+		) );
+
 		return $this;
 	}
 
@@ -224,6 +253,19 @@ class Admin {
 						) )
 						->set_layout('tabbed-vertical')
 						->set_header_template('<%- title %>')
+				) );
+
+				Container::make( 'post_meta', __( 'Products Page Settings', 'crb' ) )
+				->where( 'post_type', '=', 'page' )
+				->where( 'post_template', '=', 'products.php' )
+				->add_fields( array(
+					Field::make( 'association', 'crb_products_selected', __( 'Select Products', 'crb' ) )
+						->set_types( array(
+							array(
+								'type' => 'post',
+								'post_type' => 'crb_product'
+							)
+						) )
 				) );
 
 		return $this;
