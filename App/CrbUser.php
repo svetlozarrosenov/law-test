@@ -9,6 +9,10 @@ class CrbUser {
 
 		add_action( 'wp_ajax_crb_register_user', array('LawtestManager\TestPackage\CrbUser', 'register') );
 		add_action( 'wp_ajax_nopriv_crb_register_user', array('LawtestManager\TestPackage\CrbUser', 'register') );
+
+		add_filter( 'carbon_fields_user_meta_container_admin_only_access', function() {
+			return false;
+		} );
 	}
 
 	public static function login() {

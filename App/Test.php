@@ -24,7 +24,8 @@ class Test {
 		wp_send_json_success( [
     		'showTest' => $postType === 'crb_test',
     		'isProductPage' => false, 
-    		'isLoggedIn' => false,
+    		'showLoginPopup' => (!\is_user_logged_in()),
+    		'hasSubscription' => false,
     		'test' => [
     			'questions' => $test['questions'],
     			'domain' => $test['domain'],

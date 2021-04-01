@@ -230,13 +230,28 @@ class Admin {
 	}
 	public function createUserMeta() {
 		Container::make( 'user_meta', 'Order Settings' )
+		->show_on_user_role( array( 'administrator' ) )
 		    ->add_fields( array(
 		        Field::make( 'text', 'crb_user_order_id', __( 'Order ID', 'crb' ) ),
 		        Field::make( 'text', 'crb_user_start_date', __( 'Start Date', 'crb' ) ),
 		        Field::make( 'text', 'crb_user_end_date', __( 'End Date', 'crb' ) ),
 		        Field::make( 'text', 'crb_user_order_status', __( 'Order Status', 'crb' ) ),
 		        Field::make( 'checkbox', 'crb_user_subscription_status', __( 'Active Subscription', 'crb' ) ),
+		        Field::make( 'oembed', 'crb_oembed', __( 'oEmbed' ) )
+
 		    ) );
+
+		    Container::make( 'user_meta', 'Orders' )
+			->show_on_user_role( array( 'subscriber' ) )
+			    ->add_fields( array(
+			        Field::make( 'html', 'crb_user_orders_table' )
+	    				->set_html( function() {
+	    					ob_start();
+	    					Loader::render('admin/user/orders');
+	    					return ob_get_clean(); 
+	    				} )
+
+			    ) );
 		    
 		return $this;
 	}

@@ -15,7 +15,6 @@ var actions = {
 			data: data
 		})
 		.then((response) => {
-			console.log(response);
 			commit({
 				type: 'startApp',
 				test: {
@@ -25,7 +24,7 @@ var actions = {
 				},
 				showTest: response.data.data.showTest,
 				isProductPage: response.data.data.isProductPage,
-				isLoggedIn: response.data.data.isLoggedIn,
+				showLoginPopup: response.data.data.showLoginPopup,
 			});
 		})
 		.catch(function (error) {

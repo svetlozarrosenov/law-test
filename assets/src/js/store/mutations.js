@@ -1,7 +1,11 @@
 var mutations = {
 	startApp(state, payload){
-		state.showTest = payload.showTest;
+		if ( ! payload.showLoginPopup ) {
+			state.showTest = payload.showTest;
+		}
+		
 		state.showTestResults = false;
+		state.showLoginPopup = payload.showLoginPopup;
 		state.test.questions = payload.test.questions;
 		state.test.currentQuestion = state.test.questions[0];
 		state.test.rightAnswers = 0;

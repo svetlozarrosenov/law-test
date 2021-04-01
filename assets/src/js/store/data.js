@@ -8,6 +8,8 @@ var data = {
 	},
 	showTest: false,
 	showTestResults: false,
+	showLoginPopup: false,
+	showRegisterPopup: false,
 };
 
 export default data;
